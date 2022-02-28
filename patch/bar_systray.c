@@ -17,7 +17,11 @@ int
 draw_systray(Bar *bar, BarArg *a)
 {
 	if (!showsystray)
-		return 0;
+       if (!showsystray) {
+          if (systray)
+            XMoveWindow(dpy, systray->win, -500, bar->by);
+          return a->x;
+       }
 
 	XSetWindowAttributes wa;
 	XWindowChanges wc;
@@ -196,3 +200,9 @@ wintosystrayicon(Window w)
 	return i;
 }
 
+void
+togglesystray(const Arg *arg)
+{
+	showsystray = !showsystray;
+	drawbarwin(systray->bar);
+}

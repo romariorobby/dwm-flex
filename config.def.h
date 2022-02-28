@@ -89,7 +89,7 @@ static const char buttonbar[]            = "<O>";
 #endif // BAR_STATUSBUTTON_PATCH
 #if BAR_SYSTRAY_PATCH
 static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int showsystray             = 1;   /* 0 means no systray */
+static int showsystray                   = 1;   /* 0 means no systray */
 #endif // BAR_SYSTRAY_PATCH
 #if BAR_TAGLABELS_PATCH
 static const char ptagf[] = "[%s %s]";          /* format of a tag label */
@@ -849,6 +849,9 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_Return,     riospawn,               {.v = termcmd } },
 	{ MODKEY,                       XK_s,          rioresize,              {0} },
 	#endif // RIODRAW_PATCH
+	#if BAR_SYSTRAY_PATCH
+	{ MODKEY|ShiftMask,             XK_b,          togglesystray,          {0} },
+	#endif // BAR_SYSTRAY_PATCH
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	#if TAB_PATCH
 	{ MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
@@ -1315,6 +1318,9 @@ static Signal signals[] = {
 	{ "focusstack",              focusstack },
 	{ "setmfact",                setmfact },
 	{ "togglebar",               togglebar },
+	#if BAR_SYSTRAY_PATCH
+	{ "togglesystray",           togglesystray },
+	#endif // BAR_SYSTRAY_PATCH
 	{ "incnmaster",              incnmaster },
 	{ "togglefloating",          togglefloating },
 	{ "focusmon",                focusmon },
@@ -1492,6 +1498,9 @@ static IPCCommand ipccommands[] = {
 	IPCCOMMAND( tag, 1, {ARG_TYPE_UINT} ),
 	IPCCOMMAND( tagmon, 1, {ARG_TYPE_UINT} ),
 	IPCCOMMAND( togglebar, 1, {ARG_TYPE_NONE} ),
+	#if BAR_SYSTRAY_PATCH
+	IPCCOMMAND( togglesystray, 1, {ARG_TYPE_NONE} ),
+	#endif // BAR_SYSTRAY_PATCH
 	IPCCOMMAND( togglefloating, 1, {ARG_TYPE_NONE} ),
 	IPCCOMMAND( toggletag, 1, {ARG_TYPE_UINT} ),
 	IPCCOMMAND( toggleview, 1, {ARG_TYPE_UINT} ),
