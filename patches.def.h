@@ -770,6 +770,11 @@
  */
 #define NODMENU_PATCH 0
 
+/*
+ * Dont use flag color in dwm use within dmenu instead
+ */
+#define DMENU_NOFLAGCOLOR_PATCH 1
+
 /* This patch allows for toggleable client button bindings that have no modifiers.
  * This can, for example, allow you to move or resize using the mouse alone without holding
  * down a modifier key. This can be practical if you have extra buttons on your mouse.
